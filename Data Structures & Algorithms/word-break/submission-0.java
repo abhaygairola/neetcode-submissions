@@ -1,0 +1,18 @@
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        int n = s.length();
+        Boolean dp[] = new Boolean[n + 1];
+        Arrays.fill(dp,false);
+        dp[n] = true;
+
+        for (int i = n - 1; i >= 0; i--) {
+            for (String word : wordDict) {
+                if (word.length() <= n - i && word.equals(s.substring(i, i + word.length()))) {
+                    dp[i]=dp[i+word.length()];
+                }
+                if(dp[i]){break;}
+            }
+        }
+        return dp[0];
+    }
+}
